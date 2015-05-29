@@ -1,6 +1,6 @@
 import scalariform.formatter.preferences._
 
-name := """devsearch-concat"""
+name := """srccat"""
 
 shellPrompt := { state => "[\033[36m" + name.value + "\033[0m] $ " }
 

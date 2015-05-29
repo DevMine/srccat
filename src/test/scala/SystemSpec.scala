@@ -1,7 +1,7 @@
 import java.nio.file.Files
 
 import de.svenjacobs.loremipsum.LoremIpsum
-import devsearch.concat.{ Main, Utils }
+import devmine.srccat.{ Main, Utils }
 import org.scalatest.{ Matchers, WordSpecLike }
 
 import scala.sys.process._

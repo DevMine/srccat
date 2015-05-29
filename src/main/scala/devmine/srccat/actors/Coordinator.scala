@@ -1,11 +1,11 @@
-package devsearch.concat.actors
+package devmine.srccat.actors
 
 import java.nio.file.{ Files, InvalidPathException, Path }
 
 import akka.actor.{ Actor, ActorLogging, Props }
-import devsearch.concat.Utils
-import devsearch.concat.actors.Coordinator._
-import devsearch.concat.actors.Worker._
+import devmine.srccat.Utils
+import devmine.srccat.actors.Coordinator._
+import devmine.srccat.actors.Worker._
 import org.apache.commons.io.FileUtils._
 
 /**

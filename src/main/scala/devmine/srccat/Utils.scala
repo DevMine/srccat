@@ -1,4 +1,4 @@
-package devsearch.concat
+package devmine.srccat
 
 import java.io._
 import java.nio.file.{ Paths, Files, Path }

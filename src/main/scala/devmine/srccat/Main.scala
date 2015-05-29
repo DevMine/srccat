@@ -1,11 +1,11 @@
-package devsearch.concat
+package devmine.srccat
 
 import java.nio.file.{ Path, Files, Paths }
 import java.util.concurrent.Executors
 
 import akka.actor.ActorSystem
-import devsearch.concat.actors.Worker.Begin
-import devsearch.concat.actors.{ Coordinator, Worker }
+import devmine.srccat.actors.Worker.Begin
+import devmine.srccat.actors.{ Coordinator, Worker }
 import scopt.OptionParser
 
 import scala.concurrent.ExecutionContext
@@ -24,9 +24,9 @@ object Main {
     val executionContext = ExecutionContext.fromExecutor(threadPool)
 
     /* Create new actor system */
-    val system = ActorSystem("devsearch-concat", defaultExecutionContext = Some(executionContext))
+    val system = ActorSystem("srccat", defaultExecutionContext = Some(executionContext))
 
-    /* Initiate devsearch.concat.actors */
+    /* Initiate devmine.srccat.actors */
     val master = system.actorOf(Coordinator.props(repoRoot, outputFolder, numWorkers))
     val workers = Vector.fill(numWorkers)(system.actorOf(Worker.props(master)))
 
@@ -45,14 +45,14 @@ object Main {
     import Files._
 
     @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.NonUnitStatements"))
-    val parser: OptionParser[Config] = new OptionParser[Config]("devsearch-concat") {
+    val parser: OptionParser[Config] = new OptionParser[Config]("srccat") {
       opt[Int]('j', "jobs").text("Maximum number of jobs to run").action((j, c) => c.copy(parallelism = j))
       arg[String]("<REPO_ROOT>").text("Repository root").action((repo, c) => c.copy(repoRoot = repo))
       arg[String]("<OUTPUT_FOLDER>").text("Output folder for big files").action((out, c) => c.copy(outputFolder = out))
     }
 
     def fail(msg: String): Nothing = {
-      Console.err.println(s"[devsearch-concat] ERROR : $msg")
+      Console.err.println(s"[srccat] ERROR : $msg")
       sys.exit(1)
     }
 

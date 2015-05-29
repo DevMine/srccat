@@ -1,12 +1,12 @@
-package devsearch.concat.actors
+package devmine.srccat.actors
 
 import java.io._
 import java.nio.file.{ Paths, Files, Path }
 
 import akka.actor.{ Actor, ActorLogging, ActorRef, Props }
-import devsearch.concat.Utils
-import devsearch.concat.actors.Coordinator._
-import devsearch.concat.actors.Worker._
+import devmine.srccat.Utils
+import devmine.srccat.actors.Coordinator._
+import devmine.srccat.actors.Worker._
 import org.apache.commons.compress.archivers.{ ArchiveOutputStream, ArchiveStreamFactory }
 import org.apache.commons.compress.archivers.tar.{ TarArchiveEntry, TarArchiveOutputStream }
 import org.apache.commons.compress.compressors.{ CompressorOutputStream, CompressorStreamFactory }
