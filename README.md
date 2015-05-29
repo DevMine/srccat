@@ -1,16 +1,22 @@
-devsearch-concat
-================
+# srccat: concatenate repositories into large tar archive
 
-Concatenate source files from the DevMine source repositories.
+`srccat` reads files from source code repositories, stored either in a folder or
+a tar archive, and concatenate them into large tar archives.
 
-The size of a block on hdfs is at least 64MB. For that reason, if we want to run some large computation
-with spark or hadoop's MapReduce we need to concatenate small files into bigger ones that are more suitable for hdfs.
- 
-devsearch-concat will walk throught the GitHub data that has been made available by DevMine's crawld (https://github.com/DevMine/crawld)
-and filter out all files that are not text or too large to be human readable code. It will then create tarballs 
-at least 128MB in size with those files.
+This is especially useful for processing on
+[Hadoop](http://hadoop.apache.org/) or [Spark](https://spark.apache.org/).
 
-devsearch-concat assumes a directory structure as follows:
+The size of a block on Hadoop Distributed File System (HDFS) is at least 64MB.
+Hence, intensive jobs with Spark or Hadoop's MapReduce, perform better if
+the small files are concatenated into more suitable larger ones.
+
+`srccat` walks through the files of repositories and filters out all files
+that are not text or too large to be human readable code. It then creates
+tar archives of a size of at least 128MB with those files.
+All the files paths in the resulting tar archives are relative to `REPO_ROOT`.
+
+`srccat` assumes the following directory structure, which is the one used by
+[crawld](http://devmine.ch/doc/crawld/):
 
 ```
 REPO_ROOT
@@ -19,15 +25,10 @@ REPO_ROOT
         └── Repository
 ```
 
-The repositories can either be normal directories or tar archives.
-
-All the files' paths in the resulting tar archives are relative to REPO_ROOT. 
-
-
 Build & Run
 -----------
 
 ```
 > sbt assembly
-> java -jar target/scala-2.10/devsearch-concat-assembly-1.0.jar [-j=<numJobs>] <REPO_ROOT> <OUTPUT_FOLDER> 
+> java -jar target/scala-2.11/srccat-assembly-1.0.jar [-j=<numJobs>] <REPO_ROOT> <OUTPUT_FOLDER>
 ```
