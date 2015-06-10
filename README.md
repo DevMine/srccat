@@ -29,6 +29,6 @@ Build & Run
 -----------
 
 ```
-> sbt assembly
-> java -jar target/scala-2.11/srccat-assembly-1.0.jar [-j=<numJobs>] <REPO_ROOT> <OUTPUT_FOLDER>
+make build
+java -jar srccat.jar [-j=<numJobs>] <REPO_ROOT> <OUTPUT_FOLDER>
 ```
