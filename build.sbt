@@ -4,7 +4,7 @@ name := """srccat"""
 
 shellPrompt := { state => "[\033[36m" + name.value + "\033[0m] $ " }
 
-version := "1.0"
+version := "1.0.0"
 
 scalaVersion := "2.11.6"
 
